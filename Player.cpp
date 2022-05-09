@@ -2,18 +2,15 @@
 #include "utilities.h"
 #include <cstring>
 
-#define DEFAULT_MAXHP 100
-#define DEFAULT_FORCE 5
-#define MAX_LEVEL 10
 
-char *Player::allocateNameAndCopy(const char *name)
+char* Player::allocateNameAndCopy(const char* name)
 {
     return strcpy(new char[strlen(name) + 1], name);
 }
 
 // TODO: Should we implement inside or outside of parentheses (using ternary operator like douchebags)?
 // TODO: Check piazza for default name in case of invalid string
-Player::Player(const char *name, const int maxHP, const int force)
+Player::Player(const char* name, const int maxHP, const int force)
 {
     m_name = allocateNameAndCopy(name);
 
@@ -25,7 +22,9 @@ Player::Player(const char *name, const int maxHP, const int force)
         m_force = DEFAULT_FORCE;
     }
     else
+    {
         m_force = force;
+    }
 
     if (maxHP < 0)
     {
@@ -41,34 +40,31 @@ Player::Player(const char *name, const int maxHP, const int force)
     m_coins = 0;
 }
 
-Player::Player(const Player &player) : m_name(allocateNameAndCopy(player.m_name)),
-                                       m_level(player.m_level),
-                                       m_force(player.m_force),
-                                       m_max_HP(player.m_max_HP),
-                                       m_HP(player.m_HP),
-                                       m_coins(player.m_coins)
-{
-}
+Player::Player(const Player& player) :
+        m_name(allocateNameAndCopy(player.m_name)),
+        m_level(player.m_level),
+        m_force(player.m_force),
+        m_max_HP(player.m_max_HP),
+        m_HP(player.m_HP),
+        m_coins(player.m_coins)
+{ }
 
-Player::~Player()
-{
-    delete[] m_name;
-}
 
-Player &Player::operator=(const Player &player)
+Player& Player::operator=(const Player& player)
 {
     if (this == &player)
     {
         return *this;
     }
 
-    delete[] m_name;
-    m_name = allocateNameAndCopy(player.m_name);
+    char* tempName = allocateNameAndCopy(player.m_name);
     m_level = player.m_level;
     m_force = player.m_force;
     m_max_HP = player.m_max_HP;
     m_HP = player.m_HP;
     m_coins = player.m_coins;
+    delete[] m_name;
+    m_name = tempName;
 
     return *this;
 }
@@ -77,6 +73,7 @@ void Player::printInfo()
 {
     printPlayerInfo(m_name, m_level, m_force, m_HP, m_coins);
 }
+
 
 void Player::levelUp()
 {
@@ -88,7 +85,8 @@ void Player::levelUp()
     m_level++;
 }
 
-int Player::getLevel() const {
+int Player::getLevel () const
+{
     return m_level;
 }
 
@@ -113,8 +111,11 @@ void Player::heal(int HPToHeal)
     {
         m_HP = m_max_HP;
     }
+
     else
+    {
         m_HP += HPToHeal;
+    }
 }
 
 void Player::damage(int HPToDamage)
@@ -157,6 +158,7 @@ bool Player::pay(int coinsToPay)
     m_coins -= coinsToPay;
 
     return true;
+
 }
 
 int Player::getAttackStrength() const

@@ -1,12 +1,16 @@
+//
+// Created by 222ro on 06-May-22.
+//
+
 // TODO: Not sure if the h file define name is relevant to conventions or not...
 #ifndef HW2_PLAYER_H
 #define HW2_PLAYER_H
 
-#define DEFAULT_MAXHP 100
-#define DEFAULT_FORCE 5
+const int DEFAULT_MAXHP = 100;
+const int DEFAULT_FORCE = 5;
+const int MAX_LEVEL = 10;
 
-class Player
-{
+class Player {
 public:
     /**
      * Constructor of Player Class
@@ -24,11 +28,8 @@ public:
      */
     Player(const Player &player);
 
-    /**
-     * Destructor of Player Class
-     * Deallocates m_name string.
-     */
-    ~Player();
+
+    ~Player() = default;
 
     /**
      * Player Class Assignment Operator
