@@ -107,7 +107,7 @@ public:
     int getAttackStrength() const;
 
 private:
-    char *m_name;
+    const char* m_name;
     int m_level;
     int m_force;
     int m_max_HP;

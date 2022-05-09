@@ -59,9 +59,8 @@ public:
     // TODO: complete the Mtmchkin class.
 
 private:
-    GameStatus m_status;
-    // TODO: Should it be const?
     Player m_player;
+    GameStatus m_status;
     const Card *m_cardsArray;
     int m_numOfCards;
     int m_currentCard;

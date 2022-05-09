@@ -31,7 +31,7 @@ void Card::applyEncounter(Player &player) const
             handleBattle(player, m_stats);
             break;
         }
-        // TODO: is this syntax ok?
+       
         case CardType::Buff: {
             if(player.pay(m_stats.cost)) {
                 player.heal(m_stats.heal);

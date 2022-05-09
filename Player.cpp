@@ -2,7 +2,7 @@
 #include "utilities.h"
 #include <cstring>
 
-
+// TODO: Maybe delete
 char* Player::allocateNameAndCopy(const char* name)
 {
     return strcpy(new char[strlen(name) + 1], name);
@@ -12,7 +12,7 @@ char* Player::allocateNameAndCopy(const char* name)
 // TODO: Check piazza for default name in case of invalid string
 Player::Player(const char* name, const int maxHP, const int force)
 {
-    m_name = allocateNameAndCopy(name);
+    m_name = name;
 
     // TODO: define initial level and coins?
     m_level = 1;
@@ -41,13 +41,13 @@ Player::Player(const char* name, const int maxHP, const int force)
 }
 
 Player::Player(const Player& player) :
-        m_name(allocateNameAndCopy(player.m_name)),
-        m_level(player.m_level),
-        m_force(player.m_force),
-        m_max_HP(player.m_max_HP),
-        m_HP(player.m_HP),
-        m_coins(player.m_coins)
-{ }
+    m_name(player.m_name),
+    m_level(player.m_level),
+    m_force(player.m_force),
+    m_max_HP(player.m_max_HP),
+    m_HP(player.m_HP),
+    m_coins(player.m_coins)
+{}
 
 
 Player& Player::operator=(const Player& player)
@@ -57,14 +57,12 @@ Player& Player::operator=(const Player& player)
         return *this;
     }
 
-    char* tempName = allocateNameAndCopy(player.m_name);
+    m_name = player.m_name;
     m_level = player.m_level;
     m_force = player.m_force;
     m_max_HP = player.m_max_HP;
     m_HP = player.m_HP;
     m_coins = player.m_coins;
-    delete[] m_name;
-    m_name = tempName;
 
     return *this;
 }
@@ -135,7 +133,7 @@ void Player::damage(int HPToDamage)
 
 bool Player::isKnockedOut() const
 {
-    return !m_HP;
+    return m_HP == 0;
 }
 
 void Player::addCoins(int coinsToAdd)
