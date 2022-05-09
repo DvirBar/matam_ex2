@@ -1,14 +1,12 @@
-//
-// Created by 222ro on 06-May-22.
-//
-//TODO: Not sure if the h file define name is relevant to conventions or not...
+// TODO: Not sure if the h file define name is relevant to conventions or not...
 #ifndef HW2_PLAYER_H
 #define HW2_PLAYER_H
 
 #define DEFAULT_MAXHP 100
 #define DEFAULT_FORCE 5
 
-class Player {
+class Player
+{
 public:
     /**
      * Constructor of Player Class
@@ -17,14 +15,14 @@ public:
      * @param maxHP - Player's Max Health Points.
      * @param force - Player's Force Points.
      */
-    explicit Player(const char* name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
+    explicit Player(const char *name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
 
     /**
      * Copy Constructor of Player Class
      * Copies every parameter of given player object to "this" player object.
      * @param player - Player object to copy.
      */
-    Player(const Player& player);
+    Player(const Player &player);
 
     /**
      * Destructor of Player Class
@@ -39,7 +37,7 @@ public:
      * @return
      *      This Player object after assignment.
      */
-    Player& operator=(const Player& player);
+    Player &operator=(const Player &player);
 
     /**
      * printInfo: Prints the player's parameters.
@@ -54,7 +52,7 @@ public:
     /**
      * getLevel: Returns player's m_level parameter.
      */
-    int getLevel () const;
+    int getLevel() const;
 
     /**
      * buff: Increases the player's m_force Parameter with given amount.
@@ -108,14 +106,14 @@ public:
     int getAttackStrength() const;
 
 private:
-    char* m_name;
+    char *m_name;
     int m_level;
     int m_force;
     int m_max_HP;
     int m_HP;
     int m_coins;
 
-    static char* allocateNameAndCopy(const char* str);
+    static char *allocateNameAndCopy(const char *str);
 };
 
-#endif //HW2_PLAYER_H
+#endif // HW2_PLAYER_H

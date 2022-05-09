@@ -1,6 +1,3 @@
-//
-// Created by Daniel_Meents on 07/04/2022.
-//
 #ifndef EX2_Card_H
 #define EX2_Card_H
 
@@ -15,10 +12,17 @@
  *  BUFF - Increase your player's force by 'm_force' points of CardStats.
  *  HEAL - Increase your player's HP by 'm_heal' points  of CardStats (no more than maxHP points).
  *  TREASURE - Get 'm_profit' coins of CardStats.
-*/
-enum class CardType {Battle, Buff, Heal, Treasure}; // The type of the Card
+ */
+enum class CardType
+{
+    Battle,
+    Buff,
+    Heal,
+    Treasure
+}; // The type of the Card
 
-class Card {
+class Card
+{
 public:
     /*
      * C'tor of Card class
@@ -27,9 +31,8 @@ public:
      * @param stats - The numeral stats of the card.
      * @return
      *      A new instance of Card.
-    */
-    Card(CardType type, const CardStats& stats);
-
+     */
+    Card(CardType type, const CardStats &stats);
 
     /*
      * Handling the player's applyEncounter with the card:
@@ -37,38 +40,32 @@ public:
      * @param player - The player.
      * @return
      *      void
-    */
-    void applyEncounter(Player& player) const;
-
+     */
+    void applyEncounter(Player &player) const;
 
     /*
      * Prints the card info:
      *
      * @return
      *      void
-    */
+     */
     void printInfo() const;
-
 
     /*
      * C'tor to the "default card" - Treasure card that gives 0 coins
-    */
-    Card(): m_effect(CardType::Treasure), m_stats() {}
-
+     */
+    Card() : m_effect(CardType::Treasure), m_stats() {}
 
     /*
      * Here we are explicitly telling the compiler to use the default methods
-    */
-    Card(const Card&) = default;
+     */
+    Card(const Card &) = default;
     ~Card() = default;
-    Card& operator=(const Card& other) = default;
-
+    Card &operator=(const Card &other) = default;
 
 private:
     CardType m_effect;
     CardStats m_stats;
-
 };
 
-
-#endif //EX2_Card_H
+#endif // EX2_Card_H
