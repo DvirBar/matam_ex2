@@ -17,29 +17,26 @@ static void handleBattle(Player &player, CardStats stats) {
     printBattleResult(isWin);
 }
 
-Card::Card(CardType type, const CardStats &stats)
-{
+Card::Card(CardType type, const CardStats &stats) {
     m_effect = type;
     m_stats = stats;
 }
 
-void Card::applyEncounter(Player &player) const
-{
-    switch (m_effect)
-    {
+void Card::applyEncounter(Player &player) const {
+    switch (m_effect) {
         case CardType::Battle: {
             handleBattle(player, m_stats);
             break;
         }
        
-        case CardType::Buff: {
+        case CardType::Heal: {
             if(player.pay(m_stats.cost)) {
                 player.heal(m_stats.heal);
             }
             break;
         }
         
-        case CardType::Heal: {
+        case CardType::Buff: {
             if(player.pay(m_stats.cost)) {
                 player.buff(m_stats.buff);
             }
@@ -51,7 +48,9 @@ void Card::applyEncounter(Player &player) const
             break;
         }
         
-        default: break;
+        default: {
+            break;
+        }
     }
 }
 

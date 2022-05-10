@@ -16,7 +16,7 @@ GameStatus Mtmchkin::getGameStatus() const {
 }
 
 void Mtmchkin::playNextCard() {
-    if(m_currentCard == m_numOfCards-1) {
+    if(m_currentCard == m_numOfCards) {
         m_currentCard = 0;
     }
     
@@ -32,6 +32,7 @@ void Mtmchkin::playNextCard() {
         m_status = GameStatus::Win;
     }
     
+    m_currentCard++;
     m_player.printInfo();
 }
 
