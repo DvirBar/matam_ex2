@@ -2,7 +2,6 @@
 // Created by 222ro on 06-May-22.
 //
 
-// TODO: Not sure if the h file define name is relevant to conventions or not...
 #ifndef HW2_PLAYER_H
 #define HW2_PLAYER_H
 
@@ -28,8 +27,11 @@ public:
      */
     Player(const Player &player);
 
-
-    ~Player() = default;
+    /**
+     * Destructor of Player Class
+     * Deletes the dynamically allocated name of the player.
+     */
+    ~Player();
 
     /**
      * Player Class Assignment Operator
@@ -107,16 +109,14 @@ public:
     int getAttackStrength() const;
 
 private:
-    // TODO: Change to string?
-    const char* m_name;
+    char* m_name;
     int m_level;
     int m_force;
     int m_max_HP;
     int m_HP;
     int m_coins;
 
-    // TODO: Maybe delete
-//    static char *allocateNameAndCopy(const char *str);
+    static char *allocateNameAndCopy(const char *str);
 };
 
 #endif // HW2_PLAYER_H

@@ -1,15 +1,14 @@
+#include <cstring>
 #include "Player.h"
 #include "utilities.h"
 
-// TODO: Maybe delete
-//char* Player::allocateNameAndCopy(const char* name) {
-//    return strcpy(new char[strlen(name) + 1], name);
-//}
+char* Player::allocateNameAndCopy(const char* name) {
+    return strcpy(new char[strlen(name) + 1], name);
+}
 
-// TODO: Should we implement inside or outside of parentheses (using ternary operator like douchebags)?
-// TODO: Check piazza for default name in case of invalid string
-Player::Player(const char* name, const int maxHP, const int force): m_name(name) {
-    // TODO: define initial level and coins?
+
+Player::Player(const char* name, const int maxHP, const int force) {
+    m_name = allocateNameAndCopy(name);
     m_level = 1;
 
     if (force < 0) {
@@ -32,7 +31,7 @@ Player::Player(const char* name, const int maxHP, const int force): m_name(name)
 }
 
 Player::Player(const Player& player):
-    m_name(player.m_name),
+    m_name(allocateNameAndCopy(player.m_name)),
     m_level(player.m_level),
     m_force(player.m_force),
     m_max_HP(player.m_max_HP),
@@ -40,18 +39,24 @@ Player::Player(const Player& player):
     m_coins(player.m_coins)
 {}
 
+Player::~Player() {
+    delete[] m_name;
+}
+
 
 Player& Player::operator=(const Player& player) {
     if (this == &player) {
         return *this;
     }
-
-    m_name = player.m_name;
+    char* tempName = allocateNameAndCopy(player.m_name);
     m_level = player.m_level;
     m_force = player.m_force;
     m_max_HP = player.m_max_HP;
     m_HP = player.m_HP;
     m_coins = player.m_coins;
+    delete[] m_name;
+    m_name = tempName;
+
 
     return *this;
 }
