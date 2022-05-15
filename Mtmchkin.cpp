@@ -3,13 +3,19 @@
 #include "Player.h"
 
 // TODO: Validations?
-Mtmchkin::Mtmchkin(const char *playerName, const Card *cardsArray, int numOfCards):
+// TODO: Make sure that the assignment is correct
+Mtmchkin::Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards):
     m_player(playerName),
-    m_status(GameStatus::MidGame),
-    m_cardsArray(cardsArray),
-    m_numOfCards(numOfCards),
-    m_currentCard(0)
-{}
+    m_status(GameStatus::MidGame)
+{
+    m_cardsArray = new Card[numOfCards];
+    for(int i = 0; i < numOfCards; i++) {
+        m_cardsArray[i] = cardsArray[i];
+    }
+        
+    m_numOfCards = numOfCards;
+    m_currentCard = 0;
+}
 
 GameStatus Mtmchkin::getGameStatus() const {
     return m_status;
@@ -34,8 +40,22 @@ void Mtmchkin::playNextCard() {
     
     m_currentCard++;
     m_player.printInfo();
-}
+} 
 
 bool Mtmchkin::isOver() const {
     return m_status != GameStatus::MidGame;
+}
+
+// TODO: Do we need operator overloading? (Big Three)
+
+Mtmchkin::Mtmchkin(const Mtmchkin& game):
+    m_player(game.m_player),
+    m_cardsArray(new Card[game.m_numOfCards]) {
+    for(int i = 0; i <= game.m_numOfCards; i++) {
+        m_cardsArray[i] = game.m_cardsArray[i];
+    }
+}
+
+Mtmchkin::~Mtmchkin() {
+    delete[] m_cardsArray;
 }

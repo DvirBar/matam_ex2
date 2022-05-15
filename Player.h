@@ -19,7 +19,7 @@ public:
      * @param maxHP - Player's Max Health Points.
      * @param force - Player's Force Points.
      */
-    explicit Player(const char *name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
+    explicit Player(const char* name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
 
     /**
      * Copy Constructor of Player Class
@@ -107,6 +107,7 @@ public:
     int getAttackStrength() const;
 
 private:
+    // TODO: Change to string?
     const char* m_name;
     int m_level;
     int m_force;
@@ -114,7 +115,8 @@ private:
     int m_HP;
     int m_coins;
 
-    static char *allocateNameAndCopy(const char *str);
+    // TODO: Maybe delete
+//    static char *allocateNameAndCopy(const char *str);
 };
 
 #endif // HW2_PLAYER_H
