@@ -17,10 +17,10 @@ static void handleBattle(Player &player, CardStats stats) {
     printBattleResult(isWin);
 }
 
-Card::Card(CardType type, const CardStats &stats) {
-    m_effect = type;
-    m_stats = stats;
-}
+Card::Card(CardType type, const CardStats &stats):
+    m_effect(type),
+    m_stats(stats)
+{}
 
 void Card::applyEncounter(Player &player) const {
     switch (m_effect) {
@@ -54,10 +54,8 @@ void Card::applyEncounter(Player &player) const {
     }
 }
 
-void Card::printInfo() const
-{
-    switch (m_effect)
-    {
+void Card::printInfo() const {
+    switch (m_effect) {
         case CardType::Battle: {
             printBattleCardInfo(m_stats);
             break;

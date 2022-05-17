@@ -10,15 +10,13 @@
  * Win - The player reached level 10.
  * Loss - The player's HP is 0.
  */
-enum class GameStatus
-{
+enum class GameStatus {
     Win,
     Loss,
     MidGame
 };
 
-class Mtmchkin
-{
+class Mtmchkin {
 public:
     /*
      * C'tor of the game:
@@ -56,14 +54,17 @@ public:
      */
     GameStatus getGameStatus() const;
 
-    Mtmchkin(const Mtmchkin&);
+    /**
+     * Destructor of Mtmchkin Class
+     * Deletes the dynamically allocated cards array.
+     */
     ~Mtmchkin();
 
 private:
     Player m_player;
     GameStatus m_status;
     Card* m_cardsArray;
-    int m_numOfCards;
+    const int m_numOfCards;
     int m_currentCard;
 };
 

@@ -8,6 +8,8 @@
 const int DEFAULT_MAXHP = 100;
 const int DEFAULT_FORCE = 5;
 const int MAX_LEVEL = 10;
+const int INIT_LEVEL = 1;
+const int INIT_COINS = 0;
 
 class Player {
 public:
@@ -116,7 +118,7 @@ private:
     int m_HP;
     int m_coins;
 
-    static char *allocateNameAndCopy(const char *str);
+    static char* allocateNameAndCopy(const char* str);
 };
 
 #endif // HW2_PLAYER_H

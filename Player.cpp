@@ -6,14 +6,14 @@ char* Player::allocateNameAndCopy(const char* name) {
     return strcpy(new char[strlen(name) + 1], name);
 }
 
-
 Player::Player(const char* name, const int maxHP, const int force) {
     m_name = allocateNameAndCopy(name);
-    m_level = 1;
+    m_level = INIT_LEVEL;
 
     if (force < 0) {
         m_force = DEFAULT_FORCE;
     }
+    
     else {
         m_force = force;
     }
@@ -22,12 +22,13 @@ Player::Player(const char* name, const int maxHP, const int force) {
         m_max_HP = DEFAULT_MAXHP;
         m_HP = DEFAULT_MAXHP;
     }
+    
     else {
         m_max_HP = maxHP;
         m_HP = maxHP;
     }
 
-    m_coins = 0;
+    m_coins = INIT_COINS;
 }
 
 Player::Player(const Player& player):
@@ -48,6 +49,7 @@ Player& Player::operator=(const Player& player) {
     if (this == &player) {
         return *this;
     }
+    
     char* tempName = allocateNameAndCopy(player.m_name);
     m_level = player.m_level;
     m_force = player.m_force;
@@ -56,7 +58,6 @@ Player& Player::operator=(const Player& player) {
     m_coins = player.m_coins;
     delete[] m_name;
     m_name = tempName;
-
 
     return *this;
 }
@@ -74,7 +75,7 @@ void Player::levelUp() {
     m_level++;
 }
 
-int Player::getLevel () const {
+int Player::getLevel() const {
     return m_level;
 }
 
@@ -108,6 +109,7 @@ void Player::damage(int HPToDamage) {
     if (m_HP - HPToDamage <= 0) {
         m_HP = 0;
     }
+    
     else
         m_HP -= HPToDamage;
 }
@@ -125,14 +127,17 @@ void Player::addCoins(int coinsToAdd) {
 }
 
 bool Player::pay(int coinsToPay) {
-    if (coinsToPay < 0 || m_coins - coinsToPay < 0) {
+    if(coinsToPay < 0) {
+        return true;
+    }
+    
+    if (m_coins - coinsToPay < 0) {
         return false;
     }
 
     m_coins -= coinsToPay;
 
     return true;
-
 }
 
 int Player::getAttackStrength() const {
