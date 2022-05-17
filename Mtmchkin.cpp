@@ -1,18 +1,18 @@
+#include <string>
 #include "Mtmchkin.h"
 #include "Card.h"
 #include "Player.h"
 
-Mtmchkin::Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards):
+Mtmchkin::Mtmchkin(const std::string playerName, const Card* cardsArray, int numOfCards):
     m_player(playerName),
-    m_numOfCards(numOfCards)
+    m_status(GameStatus::MidGame),
+    m_numOfCards(numOfCards),
+    m_currentCard(0)
 {
     m_cardsArray = new Card[numOfCards];
     for(int i = 0; i < numOfCards; i++) {
         m_cardsArray[i] = cardsArray[i];
     }
-    
-    m_status = GameStatus::MidGame;
-    m_currentCard = 0;
 }
 
 GameStatus Mtmchkin::getGameStatus() const {

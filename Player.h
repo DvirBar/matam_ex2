@@ -5,6 +5,8 @@
 #ifndef HW2_PLAYER_H
 #define HW2_PLAYER_H
 
+#include <string>
+
 const int DEFAULT_MAXHP = 100;
 const int DEFAULT_FORCE = 5;
 const int MAX_LEVEL = 10;
@@ -20,7 +22,7 @@ public:
      * @param maxHP - Player's Max Health Points.
      * @param force - Player's Force Points.
      */
-    explicit Player(const char* name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
+    explicit Player(const std::string name, const int maxHP = DEFAULT_MAXHP, const int force = DEFAULT_FORCE);
 
     /**
      * Copy Constructor of Player Class
@@ -33,8 +35,8 @@ public:
      * Destructor of Player Class
      * Deletes the dynamically allocated name of the player.
      */
-    ~Player();
-
+//    ~Player();
+// TODO: Should we write another destructor?
     /**
      * Player Class Assignment Operator
      *
@@ -111,7 +113,7 @@ public:
     int getAttackStrength() const;
 
 private:
-    char* m_name;
+    std::string m_name;
     int m_level;
     int m_force;
     int m_max_HP;

@@ -27,7 +27,7 @@ public:
      * @result
      *      An instance of Mtmchkin
      */
-    Mtmchkin(const char *playerName, const Card *cardsArray, int numOfCards);
+    Mtmchkin(const std::string playerName, const Card *cardsArray, int numOfCards);
 
     /*
      * Play the next Card - according to the instruction in the exercise document
@@ -59,7 +59,7 @@ public:
      * Deletes the dynamically allocated cards array.
      */
     ~Mtmchkin();
-
+    // TODO: Add default declaration of copy c'tor and overloading
 private:
     Player m_player;
     GameStatus m_status;
