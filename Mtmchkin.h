@@ -1,8 +1,10 @@
 #ifndef EX2_GAME_H
 #define EX2_GAME_H
-#include "Card.h"
+
 #include <iostream>
 #include <string>
+
+#include "Card.h"
 
 /*
  * GameStatus:
@@ -59,7 +61,7 @@ public:
      * Deletes the dynamically allocated cards array.
      */
     ~Mtmchkin();
-    // TODO: Add default declaration of copy c'tor and overloading
+    
 private:
     Player m_player;
     GameStatus m_status;

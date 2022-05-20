@@ -1,16 +1,9 @@
-#include <cstring>
 #include <string>
 #include "Player.h"
 #include "utilities.h"
 
 
-// TODO: Maybe delete
-char* Player::allocateNameAndCopy(const char* name) {
-    return strcpy(new char[strlen(name) + 1], name);
-}
-
 Player::Player(const std::string name, const int maxHP, const int force) {
-//    m_name = allocateNameAndCopy(name);
     m_name = name;
     m_level = INIT_LEVEL;
 
@@ -36,7 +29,6 @@ Player::Player(const std::string name, const int maxHP, const int force) {
 }
 
 Player::Player(const Player& player):
-//    m_name(allocateNameAndCopy(player.m_name)),
     m_name(player.m_name),
     m_level(player.m_level),
     m_force(player.m_force),
@@ -45,23 +37,17 @@ Player::Player(const Player& player):
     m_coins(player.m_coins)
 {}
 
-//Player::~Player() {
-//    delete[] m_name;
-//}
-
 
 Player& Player::operator=(const Player& player) {
     if (this == &player) {
         return *this;
     }
     
-//    char* tempName = allocateNameAndCopy(player.m_name);
     m_level = player.m_level;
     m_force = player.m_force;
     m_max_HP = player.m_max_HP;
     m_HP = player.m_HP;
     m_coins = player.m_coins;
-//    delete[] m_name;
     m_name = player.m_name;
 
     return *this;

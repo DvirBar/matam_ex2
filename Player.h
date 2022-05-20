@@ -32,12 +32,6 @@ public:
     Player(const Player &player);
 
     /**
-     * Destructor of Player Class
-     * Deletes the dynamically allocated name of the player.
-     */
-//    ~Player();
-// TODO: Should we write another destructor?
-    /**
      * Player Class Assignment Operator
      *
      * @param player - Player other object to assign.
@@ -45,7 +39,7 @@ public:
      *      This Player object after assignment.
      */
     Player &operator=(const Player &player);
-
+    
     /**
      * printInfo: Prints the player's parameters.
      */
@@ -111,6 +105,8 @@ public:
      * Attack Strength is defined as sum of player's m_level and m_force parameters.
      */
     int getAttackStrength() const;
+    
+    ~Player() = default;
 
 private:
     std::string m_name;
@@ -119,8 +115,6 @@ private:
     int m_max_HP;
     int m_HP;
     int m_coins;
-
-    static char* allocateNameAndCopy(const char* str);
 };
 
 #endif // HW2_PLAYER_H
