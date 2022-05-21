@@ -48,12 +48,12 @@ private:
 };
 
 // TODO: need to deal with symmetry
-HealthPoints operator+(const int pointsToAdd, const HealthPoints healthPoints1) {
+HealthPoints operator+(const int pointsToAdd, const HealthPoints& healthPoints1) {
     HealthPoints result(healthPoints1);
     return (result += pointsToAdd);
 }
 
-HealthPoints operator+(const HealthPoints healthPoints1, const int pointsToAdd) {
+HealthPoints operator+(const HealthPoints& healthPoints1, const int pointsToAdd) {
     HealthPoints result(healthPoints1);
     return (result += pointsToAdd);
 }
