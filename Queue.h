@@ -12,7 +12,7 @@ public:
         m_size(0)
     {};
     
-    void pushBack(int& value) {
+    void pushBack(int value) {
         // TODO: Should we really allocate manually?
         QNode *newNode = new QNode(value);
         
@@ -38,9 +38,15 @@ public:
         delete m_front;
         m_size--;
     }
-    
-    int front() {
-        return m_front->getData();
+
+    //returning it as reference is the key to support the syntax "queue.front() = ??"
+    //can't make the function const because of this
+    int& front() {
+        return m_front->m_data;
+    }
+
+    int size() const {
+        return m_size;
     }
     
     class Iterator;
@@ -65,7 +71,7 @@ private:
             m_next(nullptr)
         {};
 
-        int& getData() const {
+        int getData() const {
             return m_data;
         }
         
@@ -84,8 +90,9 @@ private:
         // TODO: default copy c'tor and operator=?
     
     private:
-        int& m_data;
+        int m_data;
         QNode* m_next;
+        friend class Queue;
     };
 
     QNode* m_front;
