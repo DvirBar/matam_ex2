@@ -34,6 +34,8 @@ public:
      *      The size of the queue.
      */
     int size() const;
+
+
     
     class Iterator;
     
@@ -51,12 +53,20 @@ public:
      *  points to the end of the queue.
      */
     class InvalidOperation {};
+
+    /**
+    *  A class for EmptyQueue exception.
+    *
+    *  Thrown when an invalid operation is executed on an iterator that
+    *  points to the end of the queue.
+    */
+    class EmptyQueue {};
     
 private:
     class QNode {
     public:
-        
-        // TODO: Delete getters and setters?
+        int m_data;
+        QNode* m_next;
         
         /**
          *  Constructor of QNode class.
@@ -65,40 +75,7 @@ private:
          */
         QNode(int& data);
         
-        /**
-         *  Getter for m_data field member.
-         *
-         *  @return
-         *      m_data field member.
-         */
-        int getData() const;
-        
-        /**
-         *  Getter for m_next field member.
-         *
-         *  @return
-         *      m_next field member.
-         */
-        QNode* getNext() const;
-        
-        /**
-         *  Setter for m_data field member.
-         */
-        void setData(int dataToSet);
-        
-        /**
-         *  Setter for m_next field member.
-         */
-        void setNext(QNode* next);
-        
         // TODO: default copy c'tor and operator=?
-    
-    private:
-        int m_data;
-        QNode* m_next;
-        
-        // TODO: We should still make sure that it's valid to use it that way
-        friend class Queue;
     };
 
     QNode* m_front;
@@ -160,6 +137,9 @@ private:
 };
 
 
+template<class TransformFunction>
+void transform(Queue& queue, TransformFunction transform);
+
 Queue::Queue():
     m_front(nullptr),
     m_back(nullptr),
@@ -175,7 +155,7 @@ void Queue::pushBack(int value) {
     }
     
     if(m_back != nullptr) {
-        m_back->setNext(newNode);
+        m_back->m_next = newNode;
     }
     
     m_back = newNode;
@@ -187,13 +167,16 @@ void Queue::popFront() {
         m_back = nullptr;
     }
     
-    m_front = m_front->getNext();
+    m_front = m_front->m_next;
     
     delete m_front;
     m_size--;
 }
 
 int& Queue::front() {
+    if(m_size == 0) {
+        throw EmptyQueue();
+    }
     return m_front->m_data;
 }
 
@@ -221,28 +204,14 @@ Queue::QNode::QNode(int& data):
     m_next(nullptr)
 {}
 
-int Queue::QNode::getData() const {
-    return m_data;
-}
 
-Queue::QNode* Queue::QNode::getNext() const {
-    return m_next;
-}
-
-void Queue::QNode::setData(int dataToSet) {
-    m_data = dataToSet;
-}
-
-void Queue::QNode::setNext(QNode* next) {
-    m_next = next;
-}
 
 const int& Queue::Iterator::operator*() const {
     return currentNode->m_data;
 }
 
 Queue::Iterator& Queue::Iterator::operator++() {
-    currentNode = currentNode->getNext();
+    currentNode = currentNode->m_next;
     return *this;
 }
 
@@ -260,6 +229,13 @@ Queue::Iterator::Iterator(const Queue* queue, QNode* node):
     queue(queue),
     currentNode(node)
 {}
+
+template<class TransformFunction>
+void transform(Queue& queue, TransformFunction transform) {
+    for(int& queueElement : queue) {
+        transform(queueElement);
+    }
+}
 
 
 #endif //MATAM_EX3_QUEUE_H
