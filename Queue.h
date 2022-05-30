@@ -29,6 +29,8 @@ public:
      */
     int& front();
 
+    const int& front() const;
+
     /**
      *  @return
      *      The size of the queue.
@@ -177,6 +179,14 @@ int& Queue::front() {
     if(m_size == 0) {
         throw EmptyQueue();
     }
+    return m_front->m_data;
+}
+
+const int& Queue::front() const {
+    if(m_size == 0) {
+        throw EmptyQueue();
+    }
+
     return m_front->m_data;
 }
 
